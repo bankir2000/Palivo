@@ -160,7 +160,11 @@ if (isNaN(fuelReceived)) {
         // Перевірка на умову та встановлення значень для відповідних полів
         if (document.getElementById('autoCalculate').checked) {
           highwayDistance = 0;
+          if (difference === 3) {
+    streetDistance = 0;
+} else {
             streetDistance = Math.max(4, Math.round(0.3 * (difference - highwayDistance)));// Заокруглюємо до цілого
+}
             offroadDistance = Math.round(difference - streetDistance);
         }
 // Перевірка на умову та встановлення значень для відповідних полів
