@@ -125,7 +125,11 @@
     crewNumberInput.addEventListener('change', function() {
         localStorage.setItem('crewNumber', crewNumberInput.value);
     });
-
+// Function to format the date to DD-MM-YYYY format
+function formatDate(inputDate) {
+    var dateParts = inputDate.split("-");
+    return dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
+}
     function calculate() {
         var date = document.getElementById('date').value;
         var crewNumber = document.getElementById('crewNumber').value;
@@ -183,8 +187,8 @@ if (isNaN(fuelReceived)) {
             var offroadFuel = Math.round((offroadDistance / 100) * 15.9 + (offroadDistance / 100) * 15.9 * 0.30);
 
             var totalFuel = highwayFuel + streetFuel + offroadFuel;
-
-            var result = date + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
+            var formattedDate = formatDate(date); // Format the date
+            var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
 
             document.getElementById('result').innerText = result;
         } else {
