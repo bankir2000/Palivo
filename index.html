@@ -166,6 +166,7 @@ if (endSpeedometer < startSpeedometer || (endSpeedometer - startSpeedometer === 
           highwayDistance = 0;
           if (difference === 3) {
     streetDistance = 0;
+    offroadDistance = difference;
 } else {
             streetDistance = Math.max(4, Math.round(0.3 * (difference - highwayDistance)));// Заокруглюємо до цілого
 }
