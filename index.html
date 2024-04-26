@@ -162,16 +162,19 @@ if (endSpeedometer < startSpeedometer || (endSpeedometer - startSpeedometer === 
     return; // Вихід з функції, якщо дані некоректні
 }
         // Перевірка на умову та встановлення значень для відповідних полів
-        if (document.getElementById('autoCalculate').checked) {
-          highwayDistance = 0;
-          if (difference === 3) {
-    streetDistance = 0;
-    offroadDistance = difference;
-} else {
-            streetDistance = Math.max(4, Math.round(0.3 * (difference - highwayDistance)));// Заокруглюємо до цілого
-            offroadDistance = Math.round(difference - streetDistance);
-        }
-      }    
+if (document.getElementById('autoCalculate').checked) {
+    highwayDistance = 0;
+    if (difference === 3) {
+        streetDistance = 0;
+        offroadDistance = difference;
+    } else if (difference === 0) {
+        streetDistance = 0;
+        offroadDistance = 0;
+    } else {
+        streetDistance = Math.max(4, Math.round(0.3 * (difference - highwayDistance))); // Заокруглюємо до цілого
+        offroadDistance = Math.round(difference - streetDistance);
+    }
+}
 // Перевірка на умову та встановлення значень для відповідних полів
     if (!document.getElementById('autoCalculate').checked) {
         // Перевіряємо, чи введені значення є числовими
