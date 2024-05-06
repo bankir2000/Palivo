@@ -195,13 +195,13 @@ if (document.getElementById('autoCalculate').checked) {
             var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
 
             document.getElementById('result').innerText = result;
+          document.getElementById('startSpeedometer').value = endSpeedometer;
         } else {
             document.getElementById('result').innerText = "Різниця між показаннями спідометра не відповідає сумі відстаней доріг. Будь ласка, перевірте ваші введені дані.";
           alert('Банкір рекомендує: Різниця між показаннями спідометра не відповідає сумі відстаней доріг. Будь ласка, перевірте ваші введені дані.');
             return;
         }
     }
-document.getElementById('startSpeedometer').value = endSpeedometer;
     function copyResult() {
         var resultText = document.getElementById('result').innerText;
         var textarea = document.createElement('textarea');
