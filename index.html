@@ -142,30 +142,7 @@ function formatDate(inputDate) {
         var highwayDistance = parseFloat(document.getElementById('highwayDistance').value);
         var streetDistance = parseFloat(document.getElementById('streetDistance').value);
         var offroadDistance = parseFloat(document.getElementById('offroadDistance').value);
-// Під час завантаження сторінки
-window.addEventListener('load', function() {
-    var crewNumberInput = document.getElementById('crewNumber');
-    var previousFuelInput = document.getElementById('previousFuel');
-    var fuelReceivedInput = document.getElementById('fuelReceived');
 
-    var storedCrewNumber = localStorage.getItem('crewNumber');
-    var storedPreviousFuel = localStorage.getItem('previousFuel');
-    var storedFuelReceived = localStorage.getItem('fuelReceived');
-
-    if (storedCrewNumber) {
-        crewNumberInput.value = storedCrewNumber;
-    }
-
-    if (storedPreviousFuel) {
-        previousFuelInput.value = storedPreviousFuel;
-    }
-
-    if (storedFuelReceived) {
-        fuelReceivedInput.value = storedFuelReceived;
-    }
-
-    // Додайте подібний код для відновлення значень інших полів, якщо потрібно
-});
       // Перевірка, чи введені значення є числовими
     if (isNaN(startSpeedometer) || isNaN(endSpeedometer)) {
         alert('Банкір просив завести правильні показники спідометра.');
@@ -217,26 +194,14 @@ if (document.getElementById('autoCalculate').checked) {
             var formattedDate = formatDate(date); // Format the date
             var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
 
-            // Під час введення значень
-crewNumberInput.addEventListener('change', function() {
-    localStorage.setItem('crewNumber', crewNumberInput.value);
-});
-
-document.getElementById('previousFuel').addEventListener('change', function() {
-    localStorage.setItem('previousFuel', this.value);
-});
-
-document.getElementById('fuelReceived').addEventListener('change', function() {
-    localStorage.setItem('fuelReceived', this.value);
-});
-
-// Додайте подібний код для збереження значень інших полів, якщо потрібно
+            document.getElementById('result').innerText = result;
         } else {
             document.getElementById('result').innerText = "Різниця між показаннями спідометра не відповідає сумі відстаней доріг. Будь ласка, перевірте ваші введені дані.";
           alert('Банкір рекомендує: Різниця між показаннями спідометра не відповідає сумі відстаней доріг. Будь ласка, перевірте ваші введені дані.');
             return;
         }
     }
+
     function copyResult() {
         var resultText = document.getElementById('result').innerText;
         var textarea = document.createElement('textarea');
