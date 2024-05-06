@@ -201,7 +201,7 @@ if (document.getElementById('autoCalculate').checked) {
             return;
         }
     }
-
+document.getElementById('startSpeedometer').value = endSpeedometer;
     function copyResult() {
         var resultText = document.getElementById('result').innerText;
         var textarea = document.createElement('textarea');
