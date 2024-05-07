@@ -125,6 +125,13 @@
     crewNumberInput.addEventListener('change', function() {
         localStorage.setItem('crewNumber', crewNumberInput.value);
     });
+ // Перевіряємо, чи є значення endSpeedometer в локальному сховищі
+var startSpeedometerInput = document.getElementById('startSpeedometer');
+var endSpeedometer = localStorage.getItem('endSpeedometer');
+if (endSpeedometer) {
+    // Якщо значення є, присвоюємо його полю вводу startSpeedometerInput
+    startSpeedometerInput.value = endSpeedometer;
+}
 // Function to format the date to DD-MM-YYYY format
 function formatDate(inputDate) {
     var dateParts = inputDate.split("-");
@@ -201,6 +208,14 @@ if (document.getElementById('autoCalculate').checked) {
             return;
         }
     }
+// Додамо обробник події для кнопки "Результат"
+document.querySelector('button').addEventListener('click', function() {
+    // Отримуємо значення endSpeedometer
+    var endSpeedometer = parseFloat(document.getElementById('endSpeedometer').value);
+    
+    // Зберігаємо значення endSpeedometer в локальному сховищі
+    localStorage.setItem('endSpeedometer', endSpeedometer);
+});
 
     function copyResult() {
         var resultText = document.getElementById('result').innerText;
