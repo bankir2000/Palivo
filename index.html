@@ -206,11 +206,7 @@ if (document.getElementById('autoCalculate').checked) {
 
             var totalFuel = highwayFuel + streetFuel + offroadFuel;
             var formattedDate = formatDate(date); // Format the date
-          // Обчислюємо нове значення і зберігаємо його в локальному сховищі
-    var newPreviousFuel = previousFuel - totalFuel + fuelReceived;
-    localStorage.setItem('previousFuel', newPreviousFuel);
-});
-            var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + newPreviousFuel + "л";
+            var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
 
             document.getElementById('result').innerText = result;
         } else {
@@ -223,11 +219,18 @@ if (document.getElementById('autoCalculate').checked) {
 document.querySelector('button').addEventListener('click', function() {
     // Отримуємо значення endSpeedometer
     var endSpeedometer = parseFloat(document.getElementById('endSpeedometer').value);
+   // Отримуємо значення previousFuel, fuelReceived та totalFuel
+    var previousFuel = parseFloat(document.getElementById('previousFuel').value);
+    var fuelReceived = parseFloat(document.getElementById('fuelReceived').value);
+    var totalFuel = parseFloat(document.getElementById('result').innerText.split("_")[9]);
     
     // Зберігаємо значення endSpeedometer в локальному сховищі
     localStorage.setItem('endSpeedometer', endSpeedometer);
 });
-
+  // Обчислюємо нове значення і зберігаємо його в локальному сховищі
+    var newPreviousFuel = previousFuel - totalFuel + fuelReceived;
+    localStorage.setItem('previousFuel', newPreviousFuel);
+});
     function copyResult() {
         var resultText = document.getElementById('result').innerText;
         var textarea = document.createElement('textarea');
