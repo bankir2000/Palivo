@@ -132,6 +132,13 @@ if (endSpeedometer) {
     // Якщо значення є, присвоюємо його полю вводу startSpeedometerInput
     startSpeedometerInput.value = endSpeedometer;
 }
+  // Перевіряємо, чи є значення previousFuel в локальному сховищі
+var previousFuelInput = document.getElementById('previousFuel');
+var previousFuel = localStorage.getItem('previousFuel');
+if (previousFuel) {
+    // Якщо значення є, присвоюємо його полю вводу previousFuelInput
+    previousFuelInput.value = previousFuel;
+}
 // Function to format the date to DD-MM-YYYY format
 function formatDate(inputDate) {
     var dateParts = inputDate.split("-");
@@ -199,7 +206,11 @@ if (document.getElementById('autoCalculate').checked) {
 
             var totalFuel = highwayFuel + streetFuel + offroadFuel;
             var formattedDate = formatDate(date); // Format the date
-            var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + (previousFuel - totalFuel + fuelReceived) + "л";
+          // Обчислюємо нове значення і зберігаємо його в локальному сховищі
+    var newPreviousFuel = previousFuel - totalFuel + fuelReceived;
+    localStorage.setItem('previousFuel', newPreviousFuel);
+});
+            var result = formattedDate + "_№" + crewNumber + "_" + previousFuel + "л_заправка " + fuelReceived + "л_" + endSpeedometer + "_" + difference + "км_колона " + highwayDistance + "км_траса " + streetDistance + "км_бездоріжжя " + offroadDistance + "км_" + totalFuel + "л_" + newPreviousFuel + "л";
 
             document.getElementById('result').innerText = result;
         } else {
