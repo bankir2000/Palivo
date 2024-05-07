@@ -223,15 +223,18 @@ document.querySelector('button').addEventListener('click', function() {
     var previousFuel = parseFloat(document.getElementById('previousFuel').value);
     var fuelReceived = parseFloat(document.getElementById('fuelReceived').value);
     var totalFuel = parseFloat(document.getElementById('result').innerText.split("_")[9]);
+
+    // Обчислюємо нове значення і зберігаємо його в локальному сховищі
+    var newPreviousFuel = previousFuel - totalFuel + fuelReceived;
+    localStorage.setItem('previousFuel', newPreviousFuel);
+
+    // При натисканні кнопки також оновлюємо відображення на сторінці
+    document.getElementById('previousFuel').value = newPreviousFuel;
     
     // Зберігаємо значення endSpeedometer в локальному сховищі
     localStorage.setItem('endSpeedometer', endSpeedometer);
 });
-  // Обчислюємо нове значення і зберігаємо його в локальному сховищі
-    var newPreviousFuel = previousFuel - totalFuel + fuelReceived;
-    localStorage.setItem('previousFuel', newPreviousFuel);
-});
-    function copyResult() {
+      function copyResult() {
         var resultText = document.getElementById('result').innerText;
         var textarea = document.createElement('textarea');
         textarea.value = resultText;
